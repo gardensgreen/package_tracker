@@ -8,5 +8,4 @@ class ShippingForm(FlaskForm):
     recipient_name = StringField("Recipient Name", [DataRequired()])
     origin = SelectField("Origin", [DataRequired()])
     destination = SelectField("Destination", [DataRequired()])
-    express = BooleanField("Express Shipping?", [
-                           DataRequired()], default=False)
+    express = BooleanField("Express Shipping?", default=False)
