@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for
 from config import Configuration as Config
 from app.shipping_form import ShippingForm
-from flask_migrate import Migrate 
+from flask_migrate import Migrate
 from app.models import db, Package
 from map.map import map
 
@@ -14,7 +14,8 @@ migrate = Migrate(app, db)
 
 @app.route('/')
 def index():
-    return "<h1>Package Tracker</h1>"
+    packages = Package.query.all()
+    return render_template('package_status.html', packages=packages)
 
 
 @app.route('/new_package', methods=['GET', 'POST'])
@@ -24,6 +25,7 @@ def new_package():
     form.destination.choices = [(city, city) for city in map.keys()]
 
     if form.validate_on_submit():
+        Package.advance_all_locations()
         print(form.data)
         data = form.data
         new_package = Package(
