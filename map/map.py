@@ -38,6 +38,45 @@ def find_shortest_path(start, end):
     print(distances)
 
 
+# ALTERNATE VERSION! ====================================================================================================
+# def find_shortest_path(start, end):
+#     # Question:  Why is a Python list acceptable to use for this queue?
+#     qq = []
+#     qq.append([start])
+#     distance = {}
+#     shortest_path = {}
+
+#     for city in map:
+#         distance[city] = float("inf")
+#         shortest_path[city] = None
+
+#     distance[start] = 0
+#     shortest_path[start] = []
+
+#     # print(f"DISTANCE {distance}")
+#     # print(f"SHORTEST_PATH {shortest_path}")
+
+#     while len(qq) > 0:
+#         path = qq.pop()
+#         city = path[-1]
+
+#         for connection in map[city]:
+#             new_dist = distance[city] + connection[1]
+#             if connection[0] not in distance or new_dist < distance[connection[0]]:
+#                 distance[connection[0]] = new_dist
+#                 new_path = list(path)
+#                 new_path.append(connection[0])
+#                 shortest_path[connection[0]] = new_path 
+#                 qq.insert(0, new_path)
+
+#     del shortest_path[start]
+#     print(f"SHORTEST PATH!!! {shortest_path}")
+#     print(f"PATH!!! {[path for path in shortest_path.values() if path[-1] == end][0]}")
+#     return [path for path in shortest_path.values() if path[-1] == end]
+# =========================================================================================================================
+
+
+
 # def find_shortest_path_dij(start, end):
 #     # Track list of cities that we need to visit next
 #     # Cities that we have fully explored
