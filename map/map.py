@@ -16,11 +16,14 @@ map = {
     "Miami": {("Washington D.C.", 926), ("Houston", 483), ("Nashville", 817)}
 }
 
+679 + 381 + 357 + 586 + 557 + 412 + 712 + 203 + 926
+679 + 381 + 357 + 586 + 557 + 554 + 817
+679 + 474 + 557 + 554 + 817
+
 DELIVERED = "Delivered"
 
 
 def find_shortest_path(start, end):
-    print(start)
     next_cities = [start]
     visited = set()
     distances = {start: {"distance_from_start": 0, "previous": None}}
@@ -35,7 +38,16 @@ def find_shortest_path(start, end):
                 if city not in next_cities:
                     next_cities.append(city)
         visited.add(current)
-    print(distances)
+    return sift_back(distances, start, end)
+
+
+def sift_back(distances, start, end):
+    path = [end]
+    while path[0] != start:
+        current = distances.get(path[0])
+        previous = current.get("previous")
+        path.insert(0, previous)
+    return path
 
 
 # ALTERNATE VERSION! ====================================================================================================
@@ -111,3 +123,4 @@ def advance_delivery(location, destination):
 
 # Testing
 print(find_shortest_path("Seattle", "Kansas City"))
+print(find_shortest_path("Seattle", "Miami"))
